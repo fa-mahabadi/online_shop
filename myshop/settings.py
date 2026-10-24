@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shop'
+    'shop',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,6 @@ MAILERS = {
 # Media
 MEDIA_ROOT=BASE_DIR/"media"
 MEDIA_URL="media/"
+
+# Session
+CART_SESSION_ID='cart'
