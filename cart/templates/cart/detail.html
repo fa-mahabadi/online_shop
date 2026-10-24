@@ -21,7 +21,7 @@
 
             <td><img src="{{product.image.url}}" alt="{{product.name}}" class="rounded h-100" style="object-fit: cover;width: 200px;"></td>
             <td>{{product.name}}</td>
-            <td><form action="{% url 'cart:cart_add' product.id}" method="post">
+            <td><form action="{% url 'cart:cart_add' product.id %}" method="post">
                 {% csrf_token %}
                 {{item.update_quantity_form.quantity}}
                 {{item.update_quantity_form.override}}
@@ -31,8 +31,8 @@
                 {% csrf_token %}
                 <input type="submit" value="Remove" class="btn btn-danger btn-sm">
             </form></td>
-            <td>{{item.price}}</td>
-            <td>{{item.total_price}}</td>
+            <td>${{item.price}}</td>
+            <td>${{item.total_price}}</td>
         </tr>
         {% endwith %}
         {% endfor %}
@@ -40,7 +40,7 @@
        <tr class="table-primary"> 
         <td>Total:</td>
          <td colspan="4"></td>
-         <td>{{cart.get_total_price}}</td>
+         <td>${{cart.get_total_price}}</td>
        </tr>
 </table>
 <div class="d-flex justify-content-end mt-3 ">
