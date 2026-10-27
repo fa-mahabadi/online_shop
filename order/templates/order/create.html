@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title%} Checkout {% endblock%}
+{% block content%}
+<div class="container py-5">
+    <div class="row g-5">
+        <!-- ستون فرم ثبت سفارش -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 bg-light p-4">
+                <h3 class="mb-4 text-primary fw-bold">Checkout</h3>
+                <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                        <div class="django-form-fields">
+                        {{ form.as_p }}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary  mt-3 shadow-sm">
+                        Place order
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ستون خلاصه سبد خرید -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 bg-light p-4">
+                <h4 class="mb-3 fw-bold text-dark">Your Order</h4>
+                
+                <ul class="list-group list-group-flush mb-3 bg-transparent">
+                    {% for item in cart %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent px-0">
+                        <div>
+                            <span class="fw-semibold">{{ item.product.name }}</span>
+                            <span class="text-muted small d-block">Qty: {{ item.quantity }}</span>
+                        </div>
+                        <span class="text-success fw-bold">${{ item.total_price }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <hr>
+
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <h5 class="mb-0 fw-bold">Total:</h5>
+                    <h4 class="mb-0 text-danger fw-bold">${{ cart.get_total_price }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock%}
