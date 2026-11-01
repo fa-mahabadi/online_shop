@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'shop',
     'cart',
     'order',
+    'payment'
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,11 @@ MEDIA_URL="media/"
 
 # Session
 CART_SESSION_ID='cart'
+
+
+# STRIPE_CONF
+STRIPE_PUBLISHABLE_KEY=config('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY=config('STRIPE_SECRET_KEY')
+STRIPE_VERSION_API='2026-08-26.dahlia'
+STRIPE_WEBHOOK_SECRET=config('STRIPE_WEBHOOK_SECRET')
+
