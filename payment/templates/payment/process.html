@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} Pay your order {% endblock %}
+{% block content %}
+<div class="m-5">
+<h1>Order summary</h1>
+<table class="table table-striped table-hover align-middle text-center my-5">
+    <thead class="table-primary">
+        <tr>
+            <td>Image</td>
+            <td>Product</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Total</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.items.all %}
+        <tr>
+            <td><img src="{{item.product.image.url}}" alt="" style="object-fit: cover;width: 200px;height: 150px;"></td>
+            <td>{{item.product.name}}</td>
+            <td>${{item.price}}</td>
+            <td>{{item.quantity}}</td>
+            <td>${{item.get_cost}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tr class="table-primary">
+    <td >Total</td>
+    <td colspan="3"></td>
+    <td >${{order.get_total_cost}}</td>
+    </tr>
+</table>
+<form action="{% url 'payment:process' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Pay now" class="btn btn-success">
+</form>
+</div>
+{% endblock %}
