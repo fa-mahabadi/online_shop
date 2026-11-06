@@ -1,0 +1,13 @@
+.paid{
+    color: green;
+    border: 2px solid green;
+    padding: 7px;
+    display: inline-block;
+}
+.pending{
+    color: red;
+    border: 2px solid red ;
+    padding: 7px;
+    display: inline-block;
+    
+}
