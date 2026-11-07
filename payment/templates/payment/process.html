@@ -24,10 +24,23 @@
         </tr>
         {% endfor %}
     </tbody>
+    {% if order.coupon %}
+    <tr>
+        <td>SubTotal</td>
+        <td colspan="3"></td>
+        <td>${{order.get_total_price_before_discount|floatformat:2}}</td>
+    </tr>
+    <tr>
+        <td>"{{order.coupon.code}}" coupon
+            {{order.discount}} %OFF</td>
+        <td colspan="3"></td>
+        <td>-${{order.get_discount|floatformat:2}}</td>
+    </tr>
+    {% endif %}
     <tr class="table-primary">
     <td >Total</td>
     <td colspan="3"></td>
-    <td >${{order.get_total_cost}}</td>
+    <td >${{order.get_total_cost|floatformat:2}}</td>
     </tr>
 </table>
 <form action="{% url 'payment:process' %}" method="post">
