@@ -4,26 +4,45 @@
 <div class="card m-5" style="max-width: 90%;">
   <div class="row g-0">
     <div class="col-md-4">
-      <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="{{product.name}}">
+      <img src="{{product.image.url}}" class="img-fluid rounded-start"
+        alt="{{product.name}}">
     </div>
     <div class="col-md-8">
       <div class="card-body">
         <h3 class="card-title">{{product.name}}</h3>
-        <h5><a href="{{product.category.get_absolute_url}}">{{product.category.name}}</a></h5>
+        <h5><a
+            href="{{product.category.get_absolute_url}}">{{product.category.name}}</a></h5>
         <h4 class="card-text">${{product.price}}</h4>
         <p class="card-text">
-          <form action="{% url 'cart:cart_add' product.id %}" method="post" class="d-flex align-items-center gap-2">
-          {% csrf_token %}
-          {{cart_product_form}}
-          <input type="submit" value="Add to cart" class="btn btn-primary">
+          <form action="{% url 'cart:cart_add' product.id %}" method="post"
+            class="d-flex align-items-center gap-2">
+            {% csrf_token %}
+            {{cart_product_form}}
+            <input type="submit" value="Add to cart" class="btn btn-primary">
           </form>
         </p>
         <p class="card-text">{{product.description}}</p>
-        <p class="card-text"><small class="text-muted">{{product.updated}}</small></p>
+        <p class="card-text"><small
+            class="text-muted">{{product.updated}}</small></p>
 
       </div>
     </div>
   </div>
 </div>
-
+<div class="m-5">
+  {% if recommand_products %}
+  <h3>People who bought this also bought </h3>
+  <div class="d-flex flex-warp gap-3 mt-5" >
+  {% for product in recommand_products %}
+  <div class="card" style="width: 22rem;">
+    <img src="{{product.image.url}}" class="card-img-top h-100" alt="{{product.name}}">
+    <div class="card-body">
+      <a href="{{ product.get_absolute_url }}"><h5 class="card-title">{{product.name}}</h5></a>
+      <h6>$ {{product.price}}</h6>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+  {% endif %}
+</div>
 {% endblock %}
