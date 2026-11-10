@@ -55,15 +55,40 @@
             <td>${{cart.get_total_price_after_discount|floatformat:2}}</td>
         </tr>
 </table>
-<p>Apply coupon </p>
+<div class="row">   
+    <div class="col-md-8">
+        {% if recommand_products %}
+        <div class="mt-3">
+            <h3>People also bought</h3>
+            <div class="d-flex flex-warp">
+                {% for product in recommand_products %}
+  <div class="card" style="width: 22rem;">
+    <img src="{{product.image.url}}" class="card-img-top h-100" alt="{{product.name}}">
+    <div class="card-body">
+        <a href="{{ product.get_absolute_url }}"><h5 class="card-title">{{product.name}}</h5></a>
+        <h6>$ {{product.price}}</h6>
+    </div>
+</div>
+{% endfor %}
+</div>
+</div>
+{% endif %}
+</div>
+
+<div class="col-md-4">
+    <p class="fw-bold mt-4">Apply coupon </p>
 <form action="{% url 'coupons:apply' %}" method="post">
-    {% csrf_token %}
-    {{coupon_apply_form}}
-    <input type="submit" value="Apply">
+{% csrf_token %}
+<div class="d-flex ">
+{{coupon_apply_form}}
+<input type="submit" value="Apply" class="ms-2 btn btn-primary">
+</div>
 </form>
 <div class="d-flex justify-content-end mt-3 ">
-<a href="{% url 'shop:product_list' %}" class="btn btn-success m-2">Continue Shopping </a>
-<a href="{% url 'order:order_create' %}" class="btn btn-success m-2">Check Out</a>
+<a href="{% url 'shop:product_list' %}" class="btn btn-secondary m-2">Continue Shopping </a>
+<a href="{% url 'order:order_create' %}" class="btn btn-primary m-2">Check Out</a>
+</div>
+</div>
 </div>
 </div>
 {% endblock %}
